@@ -12,7 +12,7 @@
    <artifactId>java-maven-github-actions-demo</artifactId>
    <version>0.0.1</version>
    <name>java-maven-github-actions-demo</name>
-   <description>Demo project for Spring Boot</description>
+   <description>Demo project for github actions</description>
    <properties>
       <java.version>11</java.version>
    </properties>
