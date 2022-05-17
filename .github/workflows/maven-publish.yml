@@ -35,7 +35,7 @@ jobs:
       with:
         fetch-depth: '0'
     - name: DetermineTag
-      uses: echo "::set-output name=tag::anothrNick/github-tag-action@1.36.0
+      uses: anothrNick/github-tag-action@1.36.0
       env:
         GITHUB_TOKEN: ${{ github.token }}
         DRY_RUN: true
@@ -49,9 +49,9 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
      
     - name: get version
-      run: echo "${{ steps.DetermineTag.outputs.tag }}"
+      run: echo "${{ steps.DetermineTag.outputs.new_tag }}"
     - name: update version
-      run: mvn versions:set -DnewVersion=${{ steps.DetermineTag.outputs.tag }}
+      run: mvn versions:set -DnewVersion=${{ steps.DetermineTag.outputs.new_tag }}
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Publish to GitHub Packages Apache Maven
