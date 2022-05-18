@@ -36,12 +36,18 @@
      
      - name: get version
        run: echo "${{ steps.DetermineTag.outputs.new_tag }}"
-     - name: update version
-       run: mvn versions:set -DnewVersion=${{ steps.DetermineTag.outputs.new_tag }}
-     - name: Build with Maven
-       run: mvn -B package --file pom.xml
+     - name: update and build
+       run: |
+         mvn versions:set -DnewVersion=${{ steps.DetermineTag.outputs.new_tag }}
+         mvn --batch-mode --update-snapshots package
+
+   #  - name: Build with Maven
+       #run: mvn -B package --file pom.xml
+     #  run: mvn --batch-mode --update-snapshots package
+
      - name: Publish to GitHub Packages Apache Maven
-       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+       #run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+       run: mvn --batch-mode deploy
        env:
          GITHUB_TOKEN: ${{ secrets.token }}
 
