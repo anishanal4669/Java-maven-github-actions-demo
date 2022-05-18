@@ -6,8 +6,6 @@ name: MavenBuild
 on:
   push:
     branches: [main]
-  release:
-    types: [created]
 
 jobs:
 #   tag:
@@ -52,7 +50,8 @@ jobs:
     - name: get version
       run: echo "${{ steps.DetermineTag.outputs.new_tag }}"
     - name: update version
-      run: mvn versions:set -DnewVersion=${{ steps.DetermineTag.outputs.new_tag }}
+#       run: mvn versions:set -DnewVersion=${{ steps.DetermineTag.outputs.new_tag }}
+      run: mvn versions:set -DnewVersion=0.2.0
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Publish to GitHub Packages Apache Maven
